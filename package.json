@@ -1,0 +1,17 @@
+{
+  "name": "ccf_list_crawler",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "maniacata <maniaciachao@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "jsdom": "^15.2.1",
+    "node-fetch": "^2.6.0",
+    "typescript": "^3.6.4"
+  },
+  "devDependencies": {
+    "@types/jsdom": "^12.2.4",
+    "@types/node": "^12.12.5",
+    "@types/node-fetch": "^2.5.3"
+  }
+}

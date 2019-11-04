@@ -1,9 +1,12 @@
 {
-  "name": "ccf_list_crawler",
+  "name": "ccf-list-crawler",
   "version": "1.0.0",
   "main": "index.js",
   "author": "maniacata <maniaciachao@gmail.com>",
   "license": "MIT",
+  "scripts": {
+    "run": "ts-node index.ts"
+  },
   "dependencies": {
     "jsdom": "^15.2.1",
     "node-fetch": "^2.6.0",

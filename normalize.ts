@@ -1,6 +1,6 @@
 import { writeFile, write } from "fs";
 import input from "./crawler_output.json";
-import { normalize } from "./utils.js";
+import { normalize } from "./utils";
 
 const inputCopy = Object.assign(input, {});
 

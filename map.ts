@@ -1,5 +1,5 @@
 import { writeFile } from "fs";
-import { processByLine, normalize, mapToObject } from "./utils.js";
+import { processByLine, normalize, mapToObject } from "./utils";
 import normalizedInput from "./normalize_output.json";
 
 const res = new Map<string, string[]>();

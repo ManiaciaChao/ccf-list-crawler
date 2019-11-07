@@ -33,6 +33,6 @@ export async function processByLine(filepath, callback) {
   for await (const line of rl) {
     lineNum++;
     // if (lineNum > 1000) break;
-    callback(line, lineNum);
+    await callback(line, lineNum);
   }
 }

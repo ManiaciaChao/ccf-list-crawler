@@ -1,13 +1,8 @@
-import { createWriteStream, truncate } from "fs";
+import { createWriteStream, truncate, unlinkSync, existsSync } from "fs";
 import { processByLine } from "./utils";
-import { exec } from "child_process";
-import { promisify } from "util";
+import venueIdMap from "./output/map_output.json";
 
-const execPromise = promisify(exec);
-
-import venueIdMap from "./map_output.json";
-
-const writeStream = createWriteStream("tag_output.txt", { flags: "a" });
+const writeStream = createWriteStream("./output/tag_output.txt", { flags: "a" });
 
 interface IPaper {
   id: string;
@@ -18,22 +13,27 @@ interface IPaper {
 }
 
 (async () => {
-  for (let i = 0; i <= 3; i++) {
-    await processByLine(`aminer_papers_${i}.txt`, async (line, lineNum) => {
-      const totalNum = await execPromise(`wc aminer_papers_${i}.txt`);
-
+  for (let i = 0; i <= 14; i++) {
+    const filename = `aminer_papers_${i}.txt`;
+    if (!existsSync(filename)) {
+      continue;
+    }
+    await processByLine(filename, async (line, lineNum) => {
       let paper = JSON.parse(line) as IPaper;
       if (!paper.venue || !paper.venue.id) {
         return;
       }
+      const area = venueIdMap[paper.venue.id];
+      if (!area) { return }
       writeStream.write(
         JSON.stringify(
           Object.assign(paper, {
-            area: venueIdMap[paper.venue.id]
+            area
           })
-        )
+        ) + "\n"
       );
-      console.log(`processing ${lineNum}/${totalNum}`);
+      console.log(`processing ${lineNum} of ${filename}`);
     });
+    unlinkSync(filename)
   }
 })();

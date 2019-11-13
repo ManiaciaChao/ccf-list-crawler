@@ -59,7 +59,7 @@ const output: IOutputItem[] = [];
     }
   }
 
-  writeFile("crawler_output.json", JSON.stringify(output, null, 2), () =>
+  writeFile("./output/crawler_output.json", JSON.stringify(output, null, 2), () =>
     console.log(`${output.length} items saved in output.json!`)
   );
 })();

@@ -1,5 +1,3 @@
 node_modules
-crawler_output.json
-normalize_output.json
-map_output.json
-tag_output.json
+output
+dist

@@ -1,6 +1,6 @@
 import { writeFile } from "fs";
 import { processByLine, normalize, mapToObject } from "./utils";
-import normalizedInput from "./normalize_output.json";
+import normalizedInput from "./output/normalize_output.json";
 
 const res = new Map<string, string[]>();
 
@@ -34,7 +34,7 @@ const res = new Map<string, string[]>();
     console.log(`processing: ${lineNum}/69397 found: ${res.size}`);
   });
   console.log(res);
-  writeFile("map_output.json", JSON.stringify(mapToObject(res)), () =>
+  writeFile("./output/map_output.json", JSON.stringify(mapToObject(res)), () =>
     console.log("done!")
   );
 })();

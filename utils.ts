@@ -1,5 +1,14 @@
 import { createReadStream, fstat, existsSync } from "fs";
 import { createInterface } from "readline";
+import { promisify } from "util";
+import { exec } from "child_process";
+import { argv } from "process";
+
+export interface IProcessCallback {
+  (line: string, lineNum?: number, totalLineNum?: number): any;
+}
+
+export const execute = promisify(exec);
 
 export const mapToObject = map => {
   let object = Object.create(null);
@@ -18,7 +27,7 @@ export const normalize = str =>
         .toLowerCase()
     : undefined;
 
-export async function processByLine(filepath, callback) {
+export async function processByLine(filepath, callback: IProcessCallback) {
   if (!existsSync(filepath)) {
     console.log(`NO FILE ${filepath}!`);
     return;
@@ -36,3 +45,11 @@ export async function processByLine(filepath, callback) {
     callback(line, lineNum);
   }
 }
+
+export const getSelfFilename = () =>
+  argv
+    .pop()
+    .split("/")
+    .pop()
+    .split(".")
+    .shift();

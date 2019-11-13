@@ -2,8 +2,6 @@ import { createWriteStream, truncate, unlinkSync, existsSync } from "fs";
 import { processByLine } from "./utils";
 import venueIdMap from "./output/map_output.json";
 
-const writeStream = createWriteStream("./output/tag_output.txt", { flags: "a" });
-
 interface IPaper {
   id: string;
   venue: {
@@ -13,6 +11,9 @@ interface IPaper {
 }
 
 (async () => {
+  const writeStream = createWriteStream("./output/tag_output.txt", {
+    flags: "a"
+  });
   for (let i = 0; i <= 14; i++) {
     const filename = `aminer_papers_${i}.txt`;
     if (!existsSync(filename)) {
@@ -24,7 +25,9 @@ interface IPaper {
         return;
       }
       const area = venueIdMap[paper.venue.id];
-      if (!area) { return }
+      if (!area) {
+        return;
+      }
       writeStream.write(
         JSON.stringify(
           Object.assign(paper, {
@@ -34,6 +37,6 @@ interface IPaper {
       );
       console.log(`processing ${lineNum} of ${filename}`);
     });
-    unlinkSync(filename)
+    unlinkSync(filename);
   }
 })();

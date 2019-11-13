@@ -12,8 +12,7 @@ const res = new Map<string, string[]>();
   //      if(!id) return;
 
   await processByLine("aminer_venues.txt", (line, lineNum) => {
-    line = JSON.parse(line);
-    const { id, NormalizedName: rawName } = line;
+    const { id, NormalizedName: rawName } = JSON.parse(line);
     if (!id && !rawName) return;
     const fullname = normalize(rawName);
     const set = new Set<string>();

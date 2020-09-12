@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "jsdom": "^15.2.1",
-    "node-fetch": "^2.6.0",
+    "node-fetch": "^2.6.1",
     "typescript": "^3.6.4"
   },
   "devDependencies": {
